@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
-@layer base{
+@layer base {
   h1 {
     font-weight: bold;
     font-size: 48px;
@@ -41,5 +41,9 @@
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.01em;
+  }
+
+  input[type="file"]::file-selector-button {
+    @apply p-2 bg-codeday text-white rounded-md hover:text-codeday  transition ease-in-out cursor-pointer border-0 hover:bg-gray-100;
   }
 }
