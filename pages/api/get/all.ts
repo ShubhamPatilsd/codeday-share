@@ -1,9 +1,9 @@
-import prisma from '../../../db/prisma'
+import prisma from "../../../db/prisma";
 
-export async function findAllPosts(){
-    return await prisma.post.findMany({})
+export async function findAllPosts() {
+  return await prisma.post.findMany({});
 }
 
-export default async function handler(req, res){
-    return await findAllPosts()
+export default async function handler(req, res) {
+  res.json(await findAllPosts());
 }

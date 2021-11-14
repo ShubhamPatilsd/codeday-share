@@ -18,4 +18,5 @@ model Post {
   resourceType String?
   username String
   pfp String
+  date DateTime @default(now())
 }

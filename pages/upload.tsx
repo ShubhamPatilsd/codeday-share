@@ -44,7 +44,12 @@ const Upload: NextPage = () => {
               />
             </div>
             <div className="flex justify-center">
-              <input name="image" type="file" className="mx-auto" />
+              <input
+                name="image"
+                type="file"
+                className="mx-auto"
+                accept="image/*, video*/"
+              />
             </div>
 
             <div className="flex justify-center w-full">

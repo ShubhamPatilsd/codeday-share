@@ -4,7 +4,27 @@ interface PostCardProps {
   resourceType?: string;
   username: string;
   pfp: string | undefined | null;
+  date: string;
 }
+
+const compressImage = (cloudinaryURL: string) => {
+  console.log(cloudinaryURL);
+  let urlParts = cloudinaryURL.split("/");
+  const quality = 60;
+  let newUrl = "";
+
+  urlParts.forEach((part) => {
+    if (part === "upload") {
+      newUrl += `upload/q_${quality}/`;
+    } else {
+      newUrl += `${part}/`;
+    }
+  });
+
+  console.log(newUrl);
+
+  return newUrl;
+};
 
 const PostCard = ({
   message,
@@ -12,13 +32,20 @@ const PostCard = ({
   resourceType,
   username,
   pfp,
+  date,
 }: PostCardProps) => {
+  console.log(date);
+  compressImage(media);
   return (
     <div className="p-4 rounded-md bg-gray-100 shadow-md w-min space-y-6">
-      <div className="flex items-center space-x-2">
-        <img src={pfp} className="w-8 h-8  rounded-full" />{" "}
-        <p className="font-bold">{username}</p>
+      <div>
+        <div className="flex items-center space-x-2">
+          <img src={pfp} className="w-8 h-8  rounded-full" />{" "}
+          <p className="font-bold">{username}</p>
+        </div>
+        <p>{new Date(date).toLocaleString()}</p>
       </div>
+
       <p>{message}</p>
       {resourceType && resourceType === "image" ? (
         <img src={media} className="max-w-xs" />

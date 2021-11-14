@@ -11,6 +11,7 @@ export interface DataProps {
   resourceType?: string;
   pfp: string | undefined | null;
   username: string;
+  date: string;
 }
 
 interface Posts {
@@ -24,6 +25,9 @@ const breakpointColumnsObj = {
 };
 
 const Home: NextPage<Posts> = (props) => {
+  {
+    console.log(props.posts);
+  }
   return (
     <>
       <Navbar />
@@ -47,6 +51,7 @@ const Home: NextPage<Posts> = (props) => {
             columnClassName="masonry-grid_column"
           >
             {props.posts.map((post) => {
+              console.log(post.date);
               return (
                 <PostCard
                   message={post.message}
@@ -54,6 +59,7 @@ const Home: NextPage<Posts> = (props) => {
                   resourceType={post.resourceType}
                   username={post.username}
                   pfp={post.pfp}
+                  date={post.date}
                 />
               );
             })}
@@ -65,10 +71,14 @@ const Home: NextPage<Posts> = (props) => {
   );
 };
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { findAllPosts } = require("./api/get/all");
 
   const posts = await findAllPosts();
+
+  posts.forEach((post) => {
+    post.date = post.date.toString();
+  });
 
   return {
     props: { posts: posts },
