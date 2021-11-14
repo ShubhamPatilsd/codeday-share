@@ -43,7 +43,23 @@
     letter-spacing: 0.01em;
   }
 
+  .masonry-grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px; /* gutter size offset */
+    width: auto;
+  }
+  .masonry-grid_column {
+    padding-left: 30px; /* gutter size */
+    background-clip: padding-box;
+  }
+
   input[type="file"]::file-selector-button {
     @apply p-2 bg-codeday text-white rounded-md hover:text-codeday  transition ease-in-out cursor-pointer border-0 hover:bg-gray-100;
+  }
+
+  .masonry-grid_column > div {
+    margin-bottom: 30px;
   }
 }

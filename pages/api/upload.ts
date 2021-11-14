@@ -21,7 +21,7 @@ export const config = {
 
 handler.post(async (req: any, res: any) => {
   console.log("name", process.env.CLOUDINARY_NAME);
-  const { message } = req.body;
+  const { message, username, pfp } = req.body;
   console.log(req.body);
   console.log(req.files);
 
@@ -33,6 +33,8 @@ handler.post(async (req: any, res: any) => {
         const resultData = await prisma.post.create({
           data: {
             media: result.url,
+            username: username[0],
+            pfp: pfp[0],
             message: message[0],
             resourceType: result.resource_type,
           },

@@ -1,9 +1,12 @@
+import axios from "axios";
 import type { NextPage } from "next";
-import { getSession, signIn } from "next-auth/client";
+import { getSession, signIn, useSession } from "next-auth/client";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 
 const Upload: NextPage = () => {
+  const [session, loading] = useSession();
+
   useEffect(() => {
     (async () => {
       const session = await getSession();
@@ -13,11 +16,24 @@ const Upload: NextPage = () => {
     })();
   }, []);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    let formData = new FormData(event.target);
+    formData.append("username", session.user.name);
+    formData.append("pfp", session.user.image);
+
+    axios("/api/upload", { method: "POST", data: formData });
+  }
+
   return (
     <>
       <Navbar />
       <div className="flex justify-center">
-        <form method="post" action="/api/upload" encType="multipart/form-data">
+        <form
+          method="post"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="space-y-3">
             <div className="flex justify-center">
               <input

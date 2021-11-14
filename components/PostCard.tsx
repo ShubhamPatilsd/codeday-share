@@ -1,21 +1,35 @@
- interface PostCardProps{
-    message: string,
-    media?: string,
-    resourceType?: string
-  }
-
-const PostCard = ({message, media, resourceType}:PostCardProps)=>{
-
-    return(
-        <div className="p-4 rounded-md bg-gray-100 shadow-md w-min space-y-6">
-            <p>{message}</p>
-            {
-                resourceType && resourceType === "image" ? <img src={media} className="max-w-xs"/> : <video className="max-w-5xl h-auto" controls> <source src={media} type="video/mp4"/></video>
-
-            }
-        </div>
-    )
-
+interface PostCardProps {
+  message: string;
+  media?: string;
+  resourceType?: string;
+  username: string;
+  pfp: string | undefined | null;
 }
 
-export default PostCard
+const PostCard = ({
+  message,
+  media,
+  resourceType,
+  username,
+  pfp,
+}: PostCardProps) => {
+  return (
+    <div className="p-4 rounded-md bg-gray-100 shadow-md w-min space-y-6">
+      <div className="flex items-center space-x-2">
+        <img src={pfp} className="w-8 h-8  rounded-full" />{" "}
+        <p className="font-bold">{username}</p>
+      </div>
+      <p>{message}</p>
+      {resourceType && resourceType === "image" ? (
+        <img src={media} className="max-w-xs" />
+      ) : (
+        <video className="max-w-5xl h-auto" controls>
+          {" "}
+          <source src={media} type="video/mp4" />
+        </video>
+      )}
+    </div>
+  );
+};
+
+export default PostCard;

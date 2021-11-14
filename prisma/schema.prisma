@@ -16,4 +16,6 @@ model Post {
   media String?
   message String
   resourceType String?
+  username String
+  pfp String
 }
