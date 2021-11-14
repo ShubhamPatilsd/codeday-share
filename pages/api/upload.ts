@@ -11,6 +11,8 @@ cloudinary.v2.config({
   secure: true
 });
 
+
+
 const handler = nextConnect()
 handler.use(middleware)
 
