@@ -7,25 +7,6 @@ interface PostCardProps {
   date: string;
 }
 
-const compressImage = (cloudinaryURL: string) => {
-  console.log(cloudinaryURL);
-  let urlParts = cloudinaryURL.split("/");
-  const quality = 60;
-  let newUrl = "";
-
-  urlParts.forEach((part) => {
-    if (part === "upload") {
-      newUrl += `upload/q_${quality}/`;
-    } else {
-      newUrl += `${part}/`;
-    }
-  });
-
-  console.log(newUrl);
-
-  return newUrl;
-};
-
 const PostCard = ({
   message,
   media,
@@ -34,8 +15,6 @@ const PostCard = ({
   pfp,
   date,
 }: PostCardProps) => {
-  console.log(date);
-  compressImage(media);
   return (
     <div className="p-4 rounded-md bg-gray-100 shadow-md w-min space-y-6">
       <div>
